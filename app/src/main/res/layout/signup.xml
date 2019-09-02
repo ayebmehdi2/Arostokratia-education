@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/back"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_bus"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-14dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:id="@+id/desc"
+            android:textColor="@color/darkBlue"
+            tools:text="sign up as parents"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="50dp"
+            android:layout_height="match_parent">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/name"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/shadow_edit_text"
+                tools:hint="School name"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/email"
+                android:layout_margin="16dp"
+                android:background="@drawable/shadow_edit_text"
+                android:hint="Email"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/shadow_edit_text"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+                <ImageView
+                    android:layout_marginEnd="32dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_view"
+                    android:id="@+id/show"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_marginEnd="32dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_hide"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/hide"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:id="@+id/childs"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/how_many_children_you_have"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="1dp"/>
+
+
+                <Spinner
+                    android:entries="@array/childs"
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </Spinner>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:id="@+id/sinup_btn"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/shadow_button"
+                android:text="Enter"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/child"
+            android:layout_height="match_parent"
+            android:background="@color/back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/desc_kid"
+                android:textSize="35sp"
+                android:layout_marginTop="64dp"
+                android:textColor="@color/darkBlue"
+                android:text="Kid number 1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="64dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:layout_width="80dp"
+                    android:id="@+id/img"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_add"
+                    android:layout_height="80dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#424242"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="choose him photo if you want"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingStart="16dp"
+                android:id="@+id/kid_name"
+                android:paddingEnd="16dp"
+                android:hint="Kid name"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/shadow_edit_text"
+                android:layout_height="55dp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/next"
+                android:layout_gravity="end"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shadow_button"
+                android:text="Next"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

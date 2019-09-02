@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/back"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/shadow"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingTop="16sp"
+                android:paddingStart="16sp"
+                android:paddingEnd="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Francais 2eme"
+                    android:id="@+id/cls_name"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:textColor="#212121"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/more"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_more_vert_black_24dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/les"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="16sp"
+                    android:layout_height="wrap_content"
+                    android:text="Lessons"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:textColor="#424242"/>
+
+                <TextView
+                    android:padding="16sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/stu"
+                    android:layout_height="wrap_content"
+                    android:text="students"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:textColor="#424242"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".3"
+                    android:layout_height="1dp"/>
+                <View
+                    android:layout_width="0dp"
+                    android:id="@+id/v1"
+                    android:layout_weight="1"
+                    android:background="@color/darkBlue"
+                    android:layout_height="3dp"
+                    />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".3"
+                    android:layout_height="1dp"/>
+                <View
+                    android:id="@+id/v2"
+                    android:visibility="invisible"
+                    android:background="@color/darkBlue"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_weight="1" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".3"
+                    android:layout_height="1dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:id="@+id/pager_class"
+            android:layout_height="match_parent"
+            android:layout_marginTop="94dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/action"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:background="@drawable/shadow_white"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/new_lesson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/darkBlue"
+                android:textSize="16sp"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="New Lesson"/>
+
+            <TextView
+                android:id="@+id/dm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/darkBlue"
+                android:textSize="16sp"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="from DM office"/>
+
+            <TextView
+                android:id="@+id/absent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/darkBlue"
+                android:textSize="16sp"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="teacher absent"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

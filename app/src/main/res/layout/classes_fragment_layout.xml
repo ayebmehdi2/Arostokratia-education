@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/back"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/rec_classes"
+                android:padding="4dp"
+                android:layout_height="match_parent"/>
+
+
+
+            <Button
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/shadow_button"
+                android:text="new class"
+                android:textSize="16sp"
+                android:textColor="#FFF"
+                android:id="@+id/new_class_action"
+                android:layout_margin="16sp"
+                android:layout_width="120dp"
+                android:layout_height="50dp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/new_class"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/back"
+            android:gravity="center"
+            android:padding="16dp"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:hint="Class name"
+                android:id="@+id/class_name"
+                android:paddingStart="16dp"
+                android:background="@drawable/shadow_edit_text"
+                android:paddingEnd="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_marginTop="64dp"
+                android:textColor="#FFF"
+                android:id="@+id/finish"
+                android:background="@drawable/shadow_button"
+                android:text="Finich"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+</layout>

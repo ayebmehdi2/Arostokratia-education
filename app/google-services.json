@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "546103761435",
+    "firebase_url": "https://appchildren-c5a9c.firebaseio.com",
+    "project_id": "appchildren-c5a9c",
+    "storage_bucket": "appchildren-c5a9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546103761435:android:3f338387d5bfc74a",
+        "android_client_info": {
+          "package_name": "com.mehdi.blankactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546103761435-03sqjfk7b525bcdtd04mjg22m5nsh69o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mehdi.blankactivity",
+            "certificate_hash": "0b88850bfed567bfbb5f541a8ec36c5a90431750"
+          }
+        },
+        {
+          "client_id": "546103761435-g2017thjqt7ethhbu1a75cnhtf36t3cf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXv5N2LQhO6-Pn1Tahl1331cL52UR6xtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546103761435-g2017thjqt7ethhbu1a75cnhtf36t3cf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

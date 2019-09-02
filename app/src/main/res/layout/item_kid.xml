@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/shadow_white"
+    android:layout_height="220dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/kid_photo"
+                android:layout_width="35sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop"
+                android:layout_height="36dp"
+                android:background="#000"/>
+
+            <ImageView
+                android:layout_width="18sp"
+                android:layout_height="18sp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/top_start_white"/>
+            <ImageView
+                android:scaleType="centerCrop"
+                android:layout_width="18sp"
+                android:layout_height="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/top_end_white"/>
+            <ImageView
+                android:layout_width="18sp"
+                android:layout_height="18sp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/buttom_start"/>
+
+            <ImageView
+                android:layout_width="18sp"
+                android:layout_height="18sp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/buttom_end"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:id="@+id/kid_name"
+            android:layout_gravity="center_vertical"
+            android:textColor="#212121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Mehdi ayeb"/>
+
+    </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/kid_qr_code"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/free"/>
+
+
+
+
+</LinearLayout>

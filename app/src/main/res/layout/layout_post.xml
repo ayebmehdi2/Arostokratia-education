@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/back"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/shadow"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:background="#FAFAFA"
+                        android:paddingTop="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/post_user_tof"
+                                android:layout_width="40dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:scaleType="centerCrop"
+                                android:layout_height="40dp"
+                                android:background="#000"/>
+
+                            <ImageView
+                                android:layout_width="20sp"
+                                android:layout_height="20dp"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:src="@drawable/top_start_white"/>
+                            <ImageView
+                                android:layout_width="20sp"
+                                android:layout_height="20dp"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:src="@drawable/top_end_white"/>
+                            <ImageView
+                                android:layout_width="20sp"
+                                android:layout_height="20dp"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:src="@drawable/buttom_start"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:src="@drawable/buttom_end"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <TextView
+                            android:layout_marginStart="8dp"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:id="@+id/post_user_name"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#212121"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Mehdi ayeb"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="1dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            tools:text="10:45"
+                            android:id="@+id/post_time"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:textColor="#BDBDBD"/>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/post_sub"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:textSize="25sp"
+                        android:fontFamily="@font/comfortaa_bold"
+                        android:textColor="@color/darkBlue"
+                        android:text="Hello my name is mehdi"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/post_desc"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#424242"
+                        android:text="Hello my name is mehdi"
+                        />
+
+
+                    <ImageView
+                        tools:src="@drawable/free"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/post_img"
+                        android:scaleType="fitStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:paddingBottom="55dp"
+                    android:layout_weight="1"
+                    android:id="@+id/rec_commit"/>
+
+            </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shadow_top">
+
+            <EditText
+                android:layout_width="0dp"
+                android:background="#FAFAFA"
+                android:paddingStart="16sp"
+                android:id="@+id/box"
+                android:paddingEnd="16sp"
+                android:hint="share what in your mind ?"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/send"
+                android:layout_width="55dp"
+                android:background="#FAFAFA"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_send_black_24dp"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

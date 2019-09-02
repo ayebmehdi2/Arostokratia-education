@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mehdi.blankactivity">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ACTIVITYS.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.mehdi.blankactivity"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".ACTIVITYS.SignUp"
+            tools:ignore="InnerclassSeparator" />
+
+        <activity android:name=".ACTIVITYS.HomeActivity"/>
+
+        <activity android:name=".ACTIVITYS.AddKid"/>
+
+        <activity android:name=".ACTIVITYS.EditProfile"/>
+
+        <activity android:name=".ShowImage"/>
+
+        <activity android:name=".ACTIVITYS.DetailKids"/>
+
+        <activity android:name=".ACTIVITYS.Addpost"/>
+
+        <activity android:name=".ACTIVITYS.PostDetail"/>
+
+        <activity android:name=".ACTIVITYS.ActivityClass"/>
+
+        <activity android:name=".ACTIVITYS.SendNoteActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+    </application>
+
+</manifest>

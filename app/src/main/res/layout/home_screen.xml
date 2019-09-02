@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="@color/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/main_pager"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/shadow"
+            android:layout_height="65dp">
+
+
+            <TextView
+                android:id="@+id/main_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="32dp"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="Mehdi ayeb"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#212121"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shadow_top"
+            android:layout_height="65dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/not"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_megaphone"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/msg"
+                android:layout_height="40dp"
+                android:src="@drawable/message_off"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/prof"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_user_off"
+                android:layout_gravity="center"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

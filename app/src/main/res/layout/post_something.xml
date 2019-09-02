@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:background="@color/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:hint="Enter the subject"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:id="@+id/sub"
+            android:textSize="20sp"
+            android:background="@drawable/shadow"
+            android:layout_height="65dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:background="@color/back"
+                    android:textSize="18sp"
+                    android:id="@+id/des"
+                    tools:text="be more clear plzbe more clear plzbe more clear plzbe more clear plzbe more clear plzbe more clear plzbe more clear plz"
+                    android:hint="be more clear plz"
+                    android:gravity="top"/>
+
+                <ImageView
+                    tools:src="@drawable/free"
+                    android:id="@+id/img_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_add"
+                android:id="@+id/img_in"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow_button"/>
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:background="@drawable/shadow_button"
+                android:text="Post"
+                android:textSize="18sp"
+                android:id="@+id/post"
+                android:textColor="#FAFAFA"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

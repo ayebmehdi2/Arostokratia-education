@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:background="@color/back">
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@color/back"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/child"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/desc_kid"
+                android:textSize="35sp"
+                android:layout_marginTop="64dp"
+                android:textColor="@color/darkBlue"
+                android:text="Kid number 1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="64dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:layout_width="80dp"
+                    android:id="@+id/img"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_add"
+                    android:layout_height="80dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="choose him photo if you want"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingStart="16dp"
+                android:id="@+id/kid_name"
+                android:paddingEnd="16dp"
+                android:hint="Kid name"
+                android:layout_marginTop="64dp"
+                android:background="@drawable/shadow_edit_text"
+                android:layout_height="55dp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/next"
+                android:layout_gravity="end"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shadow_button"
+                android:text="Next"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

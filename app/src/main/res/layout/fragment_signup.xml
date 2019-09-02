@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="@color/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:id="@+id/parent"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:background="@drawable/shadow_sign_type"
+                android:elevation="2dp"
+                android:layout_margin="32dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_parents"/>
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#757575"
+                    android:text="Sign in as parents"/>
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="8dp"
+                android:text="Done"
+                android:id="@+id/action_parent"
+                android:textColor="#FFF"
+                android:background="@drawable/shadow_button"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="32dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/school"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_margin="32dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_professor"/>
+
+                <TextView
+                    android:layout_marginTop="8sp"
+                    android:layout_width="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#757575"
+                    android:text="Sign in as school"/>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="60dp"
+                android:textColor="#FFF"
+                android:id="@+id/action_school"
+                android:text="Done"
+                android:visibility="gone"
+                android:layout_height="60dp"
+                android:background="@drawable/shadow_button"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
