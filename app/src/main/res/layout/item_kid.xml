@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/shadow_white"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_height="220dp">
+
+    <LinearLayout
+        android:paddingBottom="18sp"
+        android:background="@drawable/shadow_white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -23,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:scaleType="centerCrop"
                 android:layout_height="36dp"
-                android:background="#000"/>
+                android:background="#EEE"/>
 
             <ImageView
                 android:layout_width="18sp"
@@ -81,4 +89,6 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

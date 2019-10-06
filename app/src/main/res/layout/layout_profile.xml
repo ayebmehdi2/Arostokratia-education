@@ -62,7 +62,7 @@
                         <ImageView
                             android:scaleType="centerCrop"
                             android:layout_width="65dp"
-                            android:layout_height="75dp"
+                            android:layout_height="65dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:src="@drawable/top_end"/>
@@ -88,6 +88,7 @@
 
                     <ImageView
                         android:layout_width="50dp"
+                        android:background="?android:attr/selectableItemBackground"
                         android:layout_alignParentEnd="true"
                         android:layout_margin="16dp"
                         android:id="@+id/edit_profil"

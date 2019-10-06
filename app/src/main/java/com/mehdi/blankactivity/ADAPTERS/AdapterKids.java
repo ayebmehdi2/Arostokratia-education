@@ -24,7 +24,7 @@ public class AdapterKids extends RecyclerView.Adapter<AdapterKids.holder> {
     private ArrayList<CHILD> dataPerson = null;
 
     public interface clickPrson{
-        void select(String uid);
+        void select(String kidName, String parentId);
     }
 
     private final clickPrson clickPrson;
@@ -46,7 +46,7 @@ public class AdapterKids extends RecyclerView.Adapter<AdapterKids.holder> {
         ImageView userImage;
         TextView userName;
         ImageView qrCode;
-        public holder(@NonNull View itemView) {
+        holder(@NonNull View itemView) {
             super(itemView);
 
 
@@ -55,12 +55,8 @@ public class AdapterKids extends RecyclerView.Adapter<AdapterKids.holder> {
             qrCode = itemView.findViewById(R.id.kid_qr_code);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickPrson.select(dataPerson.get(getAdapterPosition()).getName());
-                }
-            });
+            itemView.setOnClickListener(v -> clickPrson.select(dataPerson.get(getAdapterPosition()).getName(),
+                    dataPerson.get(getAdapterPosition()).getUid()));
 
 
 
@@ -85,7 +81,9 @@ public class AdapterKids extends RecyclerView.Adapter<AdapterKids.holder> {
         try {
             Glide.with(context).load(data.getPhoto()).into(holder.userImage);
             Glide.with(context).load(data.getQRcode()).into(holder.qrCode);
-        }catch (Exception e){ }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

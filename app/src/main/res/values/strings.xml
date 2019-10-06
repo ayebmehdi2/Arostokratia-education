@@ -1,9 +1,15 @@
 <resources>
-    <string name="app_name">Blank Activity</string>
+    <string name="app_name">Aristokratia Education</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_up_as_parents">Sign up as parents</string>
     <string name="how_many_children_you_have">How many children you have ?</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="finish">Finish</string>
+    <string name="scan">Scan</string>
+    <string name="students">Students</string>
+    <string name="lessons">Lessons</string>
 
     <string-array name="childs">
         <item>1</item>

@@ -2,12 +2,12 @@ package com.mehdi.blankactivity.DATAS;
 
 public class NOTE {
 
-    private String detail, desk;
+    private String childName, detail, desk;
     private int time, imageDesk;
 
 
-    public NOTE(String detail, String desk, int imageDesk, int time) {
-
+    public NOTE(String childName, String detail, String desk, int imageDesk, int time) {
+        this.childName = childName;
         this.detail = detail;
         this.desk = desk;
         this.imageDesk = imageDesk;
@@ -15,6 +15,14 @@ public class NOTE {
     }
 
     public NOTE() {
+    }
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public void setChildName(String childName) {
+        this.childName = childName;
     }
 
     public void setDetail(String detail) {

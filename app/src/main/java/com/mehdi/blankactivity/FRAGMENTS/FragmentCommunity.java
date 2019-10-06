@@ -20,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.mehdi.blankactivity.ACTIVITYS.Addpost;
 import com.mehdi.blankactivity.ACTIVITYS.PostDetail;
 import com.mehdi.blankactivity.ADAPTERS.AdapterCommunity;
-import com.mehdi.blankactivity.DATAS.CHILD;
 import com.mehdi.blankactivity.DATAS.POST;
 import com.mehdi.blankactivity.R;
 import com.mehdi.blankactivity.databinding.CommunityLayoutBinding;
@@ -29,9 +28,7 @@ import java.util.ArrayList;
 
 public class FragmentCommunity extends Fragment implements AdapterCommunity.CLICK {
 
-    CommunityLayoutBinding binding;
     private ArrayList<POST> comments;
-    private FirebaseDatabase database;
     private DatabaseReference reference;
     private ValueEventListener listener;
     private AdapterCommunity adapterCommunity;
@@ -40,52 +37,81 @@ public class FragmentCommunity extends Fragment implements AdapterCommunity.CLIC
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.community_layout, container, false);
+        CommunityLayoutBinding binding = DataBindingUtil.inflate(inflater, R.layout.community_layout, container, false);
 
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference();
 
-        adapterCommunity = new AdapterCommunity(this);
-        binding.recCommunity.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.recCommunity.setHasFixedSize(true);
-        binding.recCommunity.setAdapter(adapterCommunity);
+        try {
 
-        comments = new ArrayList<>();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            reference = database.getReference();
 
-        listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                comments.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    POST post = snapshot.getValue(POST.class);
-                    comments.add(post);
+            adapterCommunity = new AdapterCommunity(this);
+            binding.recCommunity.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.recCommunity.setHasFixedSize(true);
+            binding.recCommunity.setAdapter(adapterCommunity);
+
+            comments = new ArrayList<>();
+
+            listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    comments.clear();
+                    adapterCommunity.swapAdapter(comments);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        POST post = snapshot.getValue(POST.class);
+                        comments.add(post);
+                    }
+                    adapterCommunity.swapAdapter(comments);
                 }
-                adapterCommunity.swapAdapter(comments);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        };
-        reference.child("COMMUNITY").addValueEventListener(listener);
+                }
+            };
 
-        binding.addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), Addpost.class));
-            }
-        });
+
+
+            binding.addPost.setOnClickListener(view -> startActivity(new Intent(getContext(), Addpost.class)));
+
+        }catch (Exception ignored){ }
 
         return binding.getRoot();
 
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        try {
+            reference.child("COMMUNITY").removeEventListener(listener);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            reference.child("COMMUNITY").addValueEventListener(listener);
+        }catch (Exception ignored){ }
+
+    }
+
+    @Override
     public void select(String uid, String sub) {
-        String s = uid + "--" + sub;
-        Intent i = new Intent(getContext(), PostDetail.class);
-        i.putExtra("postId", s);
-        startActivity(i);
+        try {
+            String s = uid + "--" + sub;
+            Intent i = new Intent(getContext(), PostDetail.class);
+            i.putExtra("postId", s);
+            startActivity(i);
+        }catch (Exception ignored){
+
+        }
     }
 }

@@ -8,12 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mehdi.blankactivity.DATAS.MESSAGE;
-import com.mehdi.blankactivity.DATAS.POST;
 import com.mehdi.blankactivity.R;
 
 import java.text.DateFormat;
@@ -40,7 +38,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.holder> 
         TextView com_time;
         TextView com_user_name;
         TextView com;
-        public holder(@NonNull View itemView) {
+        holder(@NonNull View itemView) {
             super(itemView);
 
             com_user_photo = itemView.findViewById(R.id.com_user_tof);
@@ -67,7 +65,9 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.holder> 
 
         try {
             Glide.with(context).load(da.getImage()).into(holder.com_user_photo);
-        }catch (Exception e){ }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         holder.com_user_name.setText(da.getName());
         holder.com.setText(da.getMessage());
         Date date = new Date(da.getTime());

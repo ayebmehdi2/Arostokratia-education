@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:background="@color/back"
+       android:layout_height="match_parent">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/layout_info"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/note_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_bold"
+            android:textColor="@color/darkBlue"
+            tools:text="Francais Lesson"
+            />
+
+        <TextView
+            android:id="@+id/note_desk"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textColor="#757575"
+            android:fontFamily="@font/comfortaa_bold"
+            tools:text="new lesson"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/student_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            tools:src="@drawable/free"/>
+
+        <TextView
+            android:id="@+id/student_name"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16sp"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textColor="#212121"
+            android:fontFamily="@font/comfortaa_bold"
+            tools:text="new lesson"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_button"
+            android:text="@string/send"
+            android:layout_marginStart="16sp"
+            android:layout_marginEnd="16sp"
+            android:textColor="#FFF"
+            android:fontFamily="@font/comfortaa_bold"
+            />
+
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/cancel"
+            android:fontFamily="@font/comfortaa_bold"
+            android:textColor="#D32F2F"
+            />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+   <LinearLayout
+            android:id="@+id/layout_scan"
+       android:visibility="gone"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           android:gravity="center"
+           android:background="@color/back">
+
+           <Button
+               android:id="@+id/scan"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/shadow_button"
+               android:text="@string/scan"
+               android:layout_marginStart="16sp"
+               android:layout_marginEnd="16sp"
+               android:textColor="#FFF"
+               android:fontFamily="@font/comfortaa_bold"
+               />
+
+
+           <Button
+               android:layout_marginTop="16sp"
+               android:id="@+id/finish"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/shadow_red"
+               android:text="@string/finish"
+               android:layout_marginStart="16sp"
+               android:layout_marginEnd="16sp"
+               android:textColor="#FFF"
+               android:fontFamily="@font/comfortaa_bold"
+               />
+
+
+
+       </LinearLayout>
+
+
+
+    </RelativeLayout>
+</layout>

@@ -1,5 +1,6 @@
 package com.mehdi.blankactivity.FRAGMENTS;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,19 +19,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mehdi.blankactivity.ACTIVITYS.ActivityClass;
 import com.mehdi.blankactivity.ADAPTERS.AdapterClasses;
 import com.mehdi.blankactivity.DATAS.CLASS;
-import com.mehdi.blankactivity.DATAS.POST;
 import com.mehdi.blankactivity.R;
 import com.mehdi.blankactivity.databinding.ClassesFragmentLayoutBinding;
 
 import java.util.ArrayList;
 
-public class FragmentClasses extends Fragment {
+public class FragmentClasses extends Fragment implements AdapterClasses.CLICK {
 
-
-    ClassesFragmentLayoutBinding binding;
-    DatabaseReference refClasses;
+    private ClassesFragmentLayoutBinding binding;
+    private DatabaseReference refClasses;
     private String uid;
     private ArrayList<CLASS> arrayClasses;
     private AdapterClasses adapClasses;
@@ -42,52 +42,49 @@ public class FragmentClasses extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.classes_fragment_layout, container, false);
 
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        try {
 
-        SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(getContext());
-        uid = prf.getString("uid", "e");
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        refClasses = database.getReference().child("SCHOOLS").child(uid).child("CLASSES");
+            SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(getContext());
+            uid = prf.getString("uid", "e");
 
-
-        adapClasses = new AdapterClasses();
-        binding.recClasses.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        binding.recClasses.setHasFixedSize(true);
-        binding.recClasses.setAdapter(adapClasses);
-
-        arrayClasses = new ArrayList<>();
+            refClasses = database.getReference().child("SCHOOLS").child(uid).child("CLASSES");
 
 
-        listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayClasses.clear();
-                adapClasses.swapAdapter(arrayClasses);
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    CLASS c = snapshot.getValue(CLASS.class);
-                    arrayClasses.add(c);
+            adapClasses = new AdapterClasses(this);
+            binding.recClasses.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            binding.recClasses.setHasFixedSize(true);
+            binding.recClasses.setAdapter(adapClasses);
+
+            arrayClasses = new ArrayList<>();
+
+
+            listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    arrayClasses.clear();
+                    adapClasses.swapAdapter(arrayClasses);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        CLASS c = snapshot.getValue(CLASS.class);
+                        arrayClasses.add(c);
+                    }
+                    adapClasses.swapAdapter(arrayClasses);
                 }
-                adapClasses.swapAdapter(arrayClasses);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        };
+                }
+            };
 
 
-        binding.newClassAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            binding.newClassAction.setOnClickListener(view -> {
                 binding.newClass.setVisibility(View.VISIBLE);
                 refClasses.removeEventListener(listener);
-            }
-        });
+            });
 
-        binding.finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            binding.finish.setOnClickListener(view -> {
                 String className = binding.className.getText().toString();
                 if (className.length() > 0){
                     refClasses.child(uid + "--" + className)
@@ -96,24 +93,45 @@ public class FragmentClasses extends Fragment {
                     refClasses.addValueEventListener(listener);
                     binding.className.setText("");
                 }
-            }
-        });
+            });
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return binding.getRoot();
     }
-
-
 
     @Override
     public void onStop() {
         super.onStop();
-        refClasses.removeEventListener(listener);
+        try {
+            refClasses.removeEventListener(listener);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        refClasses.addValueEventListener(listener);
+        try {
+            refClasses.addValueEventListener(listener);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
+    @Override
+    public void select(String nameClass) {
+        try {
+            if (nameClass == null) return;
+            Intent i = new Intent(getActivity(), ActivityClass.class);
+            i.putExtra("nameClass", nameClass);
+            startActivity(i);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

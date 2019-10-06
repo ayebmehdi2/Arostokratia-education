@@ -10,6 +10,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:src="@drawable/ic_bus"
+            android:alpha=".5"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="-14dp"
             android:layout_height="wrap_content"
@@ -114,6 +115,7 @@
                 <Spinner
                     android:entries="@array/childs"
                     android:id="@+id/spinner"
+                    android:background="?android:attr/selectableItemBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 

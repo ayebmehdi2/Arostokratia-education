@@ -25,7 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:scaleType="centerCrop"
                 android:layout_height="28dp"
-                android:background="#000"/>
+                android:background="#EEE"/>
 
             <ImageView
                 android:layout_width="14sp"

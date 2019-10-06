@@ -29,6 +29,7 @@ public class AdapterCommunity extends RecyclerView.Adapter<AdapterCommunity.hold
     private final CLICK click;
 
 
+
     public void swapAdapter(ArrayList<POST> da){
         if (da == data) return;
         this.data = da;
@@ -44,7 +45,7 @@ public class AdapterCommunity extends RecyclerView.Adapter<AdapterCommunity.hold
         TextView desc;
         TextView time;
         TextView numComment;
-        public holder(@NonNull View itemView) {
+        holder(@NonNull View itemView) {
             super(itemView);
 
             color = itemView.findViewById(R.id.color);
@@ -54,12 +55,7 @@ public class AdapterCommunity extends RecyclerView.Adapter<AdapterCommunity.hold
             numComment = itemView.findViewById(R.id.num_comment);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    click.select(data.get(getAdapterPosition()).getUid(), data.get(getAdapterPosition()).getSubject());
-                }
-            });
+            itemView.setOnClickListener(v -> click.select(data.get(getAdapterPosition()).getUid(), data.get(getAdapterPosition()).getSubject()));
 
 
 
@@ -79,18 +75,23 @@ public class AdapterCommunity extends RecyclerView.Adapter<AdapterCommunity.hold
 
         if (da == null) return;
 
-        holder.color.setBackgroundColor(da.getColor());
 
-        holder.subject.setText(da.getSubject());
-        holder.desc.setText(da.getDesc());
+        try {
+            holder.color.setBackgroundColor(da.getColor());
 
-        Date date = new Date(da.getTime());
-        if (System.currentTimeMillis() - da.getTime() > 86400000){
-            holder.time.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(date));
-        }else {
-            holder.time.setText(DateFormat.getDateInstance().format(date));
+            holder.subject.setText(da.getSubject());
+            holder.desc.setText(da.getDesc());
+
+            Date date = new Date(da.getTime());
+            if (System.currentTimeMillis() - da.getTime() > 86400000){
+                holder.time.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(date));
+            }else {
+                holder.time.setText(DateFormat.getDateInstance().format(date));
+            }
+            holder.numComment.setText(String.valueOf(da.getNumComment()));
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        holder.numComment.setText(String.valueOf(da.getNumComment()));
 
     }
 

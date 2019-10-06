@@ -11,51 +11,46 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.mehdi.blankactivity.R;
 import com.mehdi.blankactivity.ACTIVITYS.SignUp;
+import com.mehdi.blankactivity.R;
 import com.mehdi.blankactivity.databinding.FragmentSignupBinding;
 
 public class FragmentSignUp extends Fragment {
 
 
-    FragmentSignupBinding binding;
+    private FragmentSignupBinding binding;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_signup, container, false);
 
-        binding.school.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        try {
+
+            binding.school.setOnClickListener(view -> {
                 defaul();
                 school();
-            }
-        });
-        binding.actionSchool.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            });
+            binding.actionSchool.setOnClickListener(view -> {
                 Intent i = new Intent(getContext(), SignUp.class);
                 i.putExtra("type", 2);
                 startActivity(i);
-            }
-        });
+            });
 
 
-        binding.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            binding.parent.setOnClickListener(view -> {
                 defaul();
                 parent();
-            }
-        });
-        binding.actionParent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            });
+            binding.actionParent.setOnClickListener(view -> {
                 Intent i = new Intent(getContext(), SignUp.class);
                 i.putExtra("type", 1);
                 startActivity(i);
-            }
-        });
+            });
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return binding.getRoot();
 
@@ -73,7 +68,7 @@ public class FragmentSignUp extends Fragment {
         binding.actionSchool.setVisibility(View.VISIBLE);
     }
 
-    public void defaul(){
+    private void defaul(){
         binding.parent.setBackgroundResource(0);
         binding.parent.setElevation(0);
         binding.actionParent.setVisibility(View.GONE);

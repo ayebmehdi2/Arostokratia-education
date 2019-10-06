@@ -40,6 +40,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_width="80dp"
                     android:id="@+id/img"
+                    android:background="?android:attr/selectableItemBackground"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_add"
                     android:layout_height="80dp" />

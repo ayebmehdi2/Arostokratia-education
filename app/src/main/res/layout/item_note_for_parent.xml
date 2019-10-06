@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@drawable/shadow"
+    android:gravity="center_vertical"
+    android:paddingStart="8dp"
+    android:layout_marginTop="8dp"
+    android:paddingEnd="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="95dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ima"
+            android:layout_width="70dp"
+            tools:src="@drawable/free"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            android:layout_height="70dp"/>
+
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/top_start_white"/>
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/top_end_white"/>
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/buttom_start"/>
+
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/buttom_end"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            tools:text="Lesson francais 1"
+            android:textSize="18sp"
+            android:maxLines="2"
+            android:id="@+id/name_and_detail"
+            android:textColor="@color/darkBlue"
+            android:fontFamily="@font/comfortaa_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            tools:text="Lesson francais 1"
+            android:textSize="14sp"
+            android:id="@+id/date_and_desk"
+            android:textColor="#616161"
+            android:fontFamily="@font/comfortaa_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ImageView
+        tools:src="@drawable/ic_video_lesson"
+        android:id="@+id/note_desk_image"
+        android:layout_width="42dp"
+        android:layout_height="42dp" />
+
+</LinearLayout>

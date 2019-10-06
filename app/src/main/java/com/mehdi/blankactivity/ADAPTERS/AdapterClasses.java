@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mehdi.blankactivity.DATAS.CLASS;
-import com.mehdi.blankactivity.DATAS.MESSAGE;
 import com.mehdi.blankactivity.R;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 public class AdapterClasses extends RecyclerView.Adapter<AdapterClasses.holder> {
 
 
-    ArrayList<CLASS> data = new ArrayList<>();
+    private ArrayList<CLASS> data = new ArrayList<>();
 
     public void swapAdapter(ArrayList<CLASS> da){
         if (da == data) return;
@@ -27,12 +26,24 @@ public class AdapterClasses extends RecyclerView.Adapter<AdapterClasses.holder> 
         }
     }
 
+    public interface CLICK{
+        void select(String nameClass);
+    }
+
+    private final CLICK click;
+
+    public AdapterClasses(CLICK c){
+        click = c;
+    }
+
     class holder extends RecyclerView.ViewHolder{
 
         TextView view;
-        public holder(@NonNull View itemView) {
+        holder(@NonNull View itemView) {
             super(itemView);
             view = itemView.findViewById(R.id.c_n);
+
+            itemView.setOnClickListener(view -> click.select(data.get(getAdapterPosition()).getName()));
         }
     }
 
@@ -47,7 +58,12 @@ public class AdapterClasses extends RecyclerView.Adapter<AdapterClasses.holder> 
     public void onBindViewHolder(@NonNull AdapterClasses.holder holder, int position) {
         CLASS dd = data.get(position);
         if (dd == null) return;
-        holder.view.setText(dd.getName());
+        if (dd.getName().length() > 10){
+            String s = dd.getName().substring(0, 10) + "...";
+            holder.view.setText(s);
+        }else {
+            holder.view.setText(dd.getName());
+        }
     }
 
 

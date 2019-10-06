@@ -26,7 +26,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:scaleType="centerCrop"
                     android:layout_height="60dp"
-                    android:background="#000"/>
+                    android:background="#EEE"/>
 
                 <ImageView
                     android:layout_width="30dp"
@@ -81,9 +81,9 @@
                 android:id="@+id/delete"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16sp"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_marginEnd="16sp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 app:fabSize="normal"
                 android:background="@drawable/shadow_red"
                 android:src="@drawable/ic_delete"/>

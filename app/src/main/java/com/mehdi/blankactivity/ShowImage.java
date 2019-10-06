@@ -1,7 +1,6 @@
 package com.mehdi.blankactivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -12,31 +11,28 @@ import com.bumptech.glide.Glide;
 
 public class ShowImage extends AppCompatActivity {
 
-    private String url;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_image);
 
+        try {
+            String url = getIntent().getStringExtra("url");
 
-        url = getIntent().getStringExtra("url");
-         /*
-         uid = getIntent().getStringExtra("uid");
-         type = getIntent().getStringExtra("type");
-        */
+            if (url == null) return;
 
-        if (url == null) return;
+            ImageView view = findViewById(R.id.img_show);
 
-        ImageView view = findViewById(R.id.img_show);
-
-        Glide.with(this).load(url).into(view);
-
-        findViewById(R.id.back_show_img).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
+            try {
+                Glide.with(this).load(url).into(view);
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        });
+
+            findViewById(R.id.back_show_img).setOnClickListener(view1 -> finish());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

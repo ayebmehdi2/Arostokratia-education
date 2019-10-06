@@ -1,5 +1,6 @@
 package com.mehdi.blankactivity.ACTIVITYS;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -7,10 +8,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mehdi.blankactivity.DATAS.CHILD;
@@ -33,64 +35,88 @@ import java.io.IOException;
 
 public class DetailKids extends AppCompatActivity {
 
-    private String name;
     KidDetailBinding binding;
-    private String uid;
+    private DatabaseReference reference;
+    private String name = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.kid_detail);
 
-        SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(this);
-        uid = prf.getString("uid", "e");
-        name = getIntent().getStringExtra("nameKid");
+        try {
+            binding = DataBindingUtil.setContentView(this, R.layout.kid_detail);
 
-        FirebaseDatabase.getInstance().getReference().child("PARENTS").child(uid).child("CHILDREN").child(name)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        CHILD child = dataSnapshot.getValue(CHILD.class);
-                        if (child == null) return;
-                        binding.kidName.setText(child.getName());
-                        try {
-                            Glide.with(DetailKids.this).load(child.getPhoto()).into(binding.kidPhoto);
-                            Glide.with(DetailKids.this).load(child.getQRcode()).into(binding.kidQrCode);
-                        }catch (Exception e){ }
-                    }
+            SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(this);
+            String uid = prf.getString("uid", "e");
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+            reference = FirebaseDatabase.getInstance().getReference();
 
-        binding.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseDatabase.getInstance().getReference().child("PARENTS").child(uid).child("CHILDREN").child(name)
-                        .removeValue();
-                startActivity(new Intent(DetailKids.this, HomeActivity.class));
+
+            boolean inSchool = getIntent().getBooleanExtra("inSchool", false);
+
+            if (inSchool){
+                String de = getIntent().getStringExtra("de");
+                if (de == null) return;
+                reference = reference.child("SCHOOLS").child(uid)
+                        .child("CLASSES").child(uid + "--" + de.split(",")[0]).child("STUDENTS").child(de.split(",")[1]);
+            }else {
+                String name = getIntent().getStringExtra("nameKid");
+                if (name == null) return;
+                reference = reference.child("PARENTS").child(uid).child("CHILDREN").child(name);
             }
-        });
 
-        binding.share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    CHILD child = dataSnapshot.getValue(CHILD.class);
+                    if (child == null) return;
+                    name = child.getName();
+                    binding.kidName.setText(child.getName());
+                    try {
+                        Glide.with(DetailKids.this).load(child.getPhoto()).into(binding.kidPhoto);
+                        Glide.with(DetailKids.this).load(child.getQRcode()).into(binding.kidQrCode);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            binding.delete.setOnClickListener(view -> {
+                reference.removeValue();
+                startActivity(new Intent(DetailKids.this, HomeActivity.class));
+            });
+
+            binding.share.setOnClickListener(view -> {
                 BitmapDrawable drawable = (BitmapDrawable) binding.kidQrCode.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
                 new AsyncDownImageShare().execute(bitmap);
-            }
-        });
+                Toast.makeText(DetailKids.this, "Wait .. ", Toast.LENGTH_LONG).show();
 
-        binding.down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            });
+
+            binding.down.setOnClickListener(view -> {
                 BitmapDrawable drawable = (BitmapDrawable) binding.kidQrCode.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
-                new AsyncDownImage().execute(bitmap);
-            }
-        });
+
+                MediaStore.Images.Media.insertImage(
+                        getContentResolver(),
+                        bitmap,
+                        name,
+                        "QR code of " + name
+                );
+
+                Toast.makeText(DetailKids.this, "Image saved check gallery", Toast.LENGTH_LONG).show();
+
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
     }
@@ -100,6 +126,7 @@ public class DetailKids extends AppCompatActivity {
         finish();
     }
 
+    @SuppressLint("StaticFieldLeak")
     class AsyncDownImageShare extends AsyncTask<Bitmap, Void, Uri>{
 
         @Override
@@ -110,15 +137,6 @@ public class DetailKids extends AppCompatActivity {
         @Override
         protected void onPostExecute(Uri uri) {
             shareImageUri(uri);
-        }
-    }
-
-    class AsyncDownImage extends AsyncTask<Bitmap, Void, Void>{
-
-        @Override
-        protected Void doInBackground(Bitmap... bitmaps) {
-            saveImage(bitmaps[0]);
-            return null;
         }
     }
 

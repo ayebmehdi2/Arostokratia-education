@@ -10,6 +10,7 @@
         android:id="@+id/back_show_img"
         android:layout_width="60dp"
         android:padding="10dp"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_height="60dp"
         android:src="@drawable/ic_back"/>
 

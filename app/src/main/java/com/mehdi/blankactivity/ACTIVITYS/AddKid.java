@@ -1,5 +1,6 @@
 package com.mehdi.blankactivity.ACTIVITYS;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,14 +15,10 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -60,25 +57,29 @@ public class AddKid extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.add_kid);
+        try {
+            binding = DataBindingUtil.setContentView(this, R.layout.add_kid);
 
-        SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(this);
-        uid = prf.getString("uid", "e");
+            SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(this);
+            uid = prf.getString("uid", "e");
 
-        childNumbers = getIntent().getIntExtra("numChild" , 1);
+            childNumbers = getIntent().getIntExtra("numChild" , 1);
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            storageReference = storage.getReference();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        reference = database.getReference();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            reference = database.getReference();
 
-        PD = new ProgressDialog(this);
-        PD.setMessage("Loading...");
-        PD.setCancelable(true);
-        PD.setCanceledOnTouchOutside(false);
+            PD = new ProgressDialog(this);
+            PD.setMessage("Loading...");
+            PD.setCancelable(true);
+            PD.setCanceledOnTouchOutside(false);
 
-        setupChild(counterChild);
+            setupChild(counterChild);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -92,32 +93,26 @@ public class AddKid extends AppCompatActivity {
         String d = "Kid number " + number;
         binding.descKid.setText(d);
 
-        binding.img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-            }
+        binding.img.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
         });
 
-        binding.next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.next.setOnClickListener(view -> {
 
-                String name = binding.kidName.getText().toString();
+            String name = binding.kidName.getText().toString();
 
-                if (name.length() > 0){
-                    CHILD child = new CHILD(uid, name, "", "");
-                    if (image != null){
-                        if (image.length() > 0){
-                            uploadImage(image, child);
-                        }
-                    }else {
-                        AsyncT asyncT = new AsyncT();
-                        asyncT.execute(child);
+            if (name.length() > 0){
+                CHILD child = new CHILD(uid, name, "", "");
+                if (image != null){
+                    if (image.length() > 0){
+                        uploadImage(image, child);
                     }
+                }else {
+                    AsyncT asyncT = new AsyncT();
+                    asyncT.execute(child);
                 }
             }
         });
@@ -141,40 +136,28 @@ public class AddKid extends AppCompatActivity {
             Toast.makeText(this, "Failed Try again", Toast.LENGTH_SHORT).show();
             PD.dismiss();
             return;
-        };
+        }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         byte[] data = baos.toByteArray();
 
         final StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
         UploadTask uploadTask = ref.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                AsyncT asyncT = new AsyncT();
-                asyncT.execute(code);
-                PD.dismiss();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        uploadTask.addOnFailureListener(exception -> {
+            AsyncT asyncT = new AsyncT();
+            asyncT.execute(code);
+            PD.dismiss();
+        }).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
+            AsyncT asyncT = new AsyncT();
+            asyncT.execute(new CHILD(code.getUid(), code.getName(), uri.toString(), ""));
+            PD.dismiss();
 
-                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        AsyncT asyncT = new AsyncT();
-                        asyncT.execute(new CHILD(code.getUid(), code.getName(), uri.toString(), ""));
-                        PD.dismiss();
-
-                    }
-                });
-
-            }
-        });
+        }));
 
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     class AsyncT extends AsyncTask<CHILD, Void, CHILDcode> {
 
 
@@ -216,53 +199,61 @@ public class AddKid extends AppCompatActivity {
     private void uploadBitmap(final CHILDcode chilDcode) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        chilDcode.getQRcode().compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        chilDcode.getQRcode().compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
         final StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
         UploadTask uploadTask = ref.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                reference.child("PARENTS").child(Objects.requireNonNull(uid))
-                        .child("CHILDREN").child(chilDcode.getName())
-                        .setValue(new CHILD(uid, chilDcode.getName(), chilDcode.getPhoto(), ""));
-                PD.dismiss();
-                if (counterChild < childNumbers) {
-                    counterChild += 1;
-                    setupChild(counterChild);
-                }else {
-                    stratHome("p");
-                }
+        uploadTask.addOnFailureListener(exception -> {
+            reference.child("PARENTS").child(Objects.requireNonNull(uid))
+                    .child("CHILDREN").child(chilDcode.getName())
+                    .setValue(new CHILD(uid, chilDcode.getName(), chilDcode.getPhoto(), ""));
+            PD.dismiss();
+            if (counterChild < childNumbers) {
+                counterChild += 1;
+                setupChild(counterChild);
+            }else {
+                stratHome("p");
             }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        reference.child("PARENTS").child(Objects.requireNonNull(uid))
-                                .child("CHILDREN").child(chilDcode.getName())
-                                .setValue(new CHILD(uid, chilDcode.getName(), chilDcode.getPhoto(), uri.toString()));
-                        PD.dismiss();
-                        if (counterChild < childNumbers) {
-                            counterChild += 1;
-                            setupChild(counterChild);
-                        }else {
-                            stratHome("p");
-                        }
-
-                    }
-                });
-
+        }).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
+            reference.child("PARENTS").child(Objects.requireNonNull(uid))
+                    .child("CHILDREN").child(chilDcode.getName())
+                    .setValue(new CHILD(uid, chilDcode.getName(), chilDcode.getPhoto(), uri.toString()));
+            PD.dismiss();
+            if (counterChild < childNumbers) {
+                counterChild += 1;
+                setupChild(counterChild);
+            }else {
+                stratHome("p");
             }
-        });
+
+        }));
 
 
     }
 
     public void stratHome(String t){
+        try {
+            SharedPreferences prf = PreferenceManager.getDefaultSharedPreferences(this);
+            uid = prf.getString("uid", "e");
+
+            childNumbers = getIntent().getIntExtra("numChild" , 1);
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            storageReference = storage.getReference();
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            reference = database.getReference();
+
+            PD = new ProgressDialog(this);
+            PD.setMessage("Loading...");
+            PD.setCancelable(true);
+            PD.setCanceledOnTouchOutside(false);
+
+            setupChild(counterChild);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         SharedPreferences.Editor prf = PreferenceManager.getDefaultSharedPreferences(this).edit();
         prf.putString("typeAPP", t);
         prf.apply();
@@ -272,14 +263,14 @@ public class AddKid extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            if (data == null) {
-                //Display an error
-                return;
+        try {
+            if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+                if (data.getData() == null) return;
+                image = data.getData().toString();
+                binding.img.setImageURI(data.getData());
             }
-            if (data.getData() == null) return;
-            image = data.getData().toString();
-            binding.img.setImageURI(data.getData());
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
